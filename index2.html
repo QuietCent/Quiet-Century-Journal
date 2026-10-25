@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiet Century Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e9e4d8;
+    --ink: #1f2738;
+    --muted: #5b6272;
+    --accent: #3d6b63;
+    --accent-ink: #f3efe4;
+    --rule: #c9c2b0;
+    --script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", "Brush Script MT", cursive;
+    --serif: "EB Garamond", Garamond, "Hoefler Text", Georgia, serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #172033;
+      --ink: #e8e1d0;
+      --muted: #a4a9b5;
+      --accent: #8fb5aa;
+      --accent-ink: #14202e;
+      --rule: #34405a;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #172033;
+    --ink: #e8e1d0;
+    --muted: #a4a9b5;
+    --accent: #8fb5aa;
+    --accent-ink: #14202e;
+    --rule: #34405a;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .hero {
+    min-height: calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .hero h1 {
+    margin: 0;
+    font-family: var(--script);
+    font-weight: 400;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    animation: settle 1.6s ease-out both;
+  }
+  @keyframes settle {
+    from { opacity: 0; transform: translateY(0.4rem); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.8rem 2.2rem;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .button:hover { background: transparent; color: var(--accent); }
+  .button:focus-visible, .back:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+  .archive {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 6rem;
+    border-top: 1px solid var(--rule);
+  }
+  .archive h2 {
+    margin: 0 0 1rem;
+    font-family: var(--script);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    line-height: 1.15;
+  }
+  .archive p { margin: 0 0 2rem; color: var(--muted); }
+  .back { color: var(--accent); text-underline-offset: 0.25em; }
+
+  [hidden] { display: none !important; }
+  .entries { list-style: none; margin: 0 0 2rem; padding: 0; }
+  .entries li { padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+  .entries a { color: var(--ink); text-decoration: none; font-size: 1.45rem; }
+  .entries a:hover { color: var(--accent); }
+  .entries a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+  .entries .date { display: block; color: var(--muted); font-size: 1rem; }
+  .essay { max-width: 38rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+  .essay h2 { margin: 0 0 0.5rem; font-family: var(--script); font-weight: 400; font-size: clamp(2.6rem, 8vw, 4rem); line-height: 1.15; }
+  .essay .date { margin: 0 0 2.5rem; color: var(--muted); font-size: 1rem; }
+  .essay p { margin: 0 0 1.4rem; line-height: 1.75; }
+  .essay .back { display: inline-block; margin-top: 1.5rem; }
+  .essay figure { margin: 2.2rem 0; }
+  .essay img { display: block; max-width: 100%; height: auto; border-radius: 2px; }
+  .essay figcaption { margin-top: 0.6rem; color: var(--muted); font-size: 1rem; font-style: italic; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero h1 { animation: none; }
+    .button { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="hero" id="home">
+    <h1>Quiet Century Journal</h1>
+    <a class="button" href="#archive">View the Archive</a>
+  </header>
+
+  <main>
+    <section class="archive" id="archive">
+      <h2>The Archive</h2>
+      <ul class="entries" id="entries"></ul>
+      <p id="empty">No entries yet. The first piece is on its way.</p>
+      <a class="back" href="#top-of-page" onclick="window.scrollTo({top: 0}); return false;">Back to the top</a>
+    </section>
+    <article class="essay" id="essay" hidden></article>
+  </main>
+<script>
+/* ============ ADD YOUR ESSAYS HERE ============
+   To add an essay, copy the example block below, paste it between the
+   square brackets, delete the comment markers around it, and fill it in.
+   - slug:  lowercase letters, numbers and hyphens only, no spaces. Must be unique.
+   - title: the essay title.
+   - date:  any text you like, such as "November 2026".
+   - body:  your essay between the backticks. Leave a blank line between paragraphs.
+   Do not type a backtick or the two characters dollar-sign and open-brace inside the essay.
+   To place a photo, put this on a line of its own, with a blank line above and below:
+   [image: photo-file-name.jpg | Optional caption]
+   The photo file must be uploaded to the same GitHub repository. The name is case-sensitive.
+   Put the newest essay first. Separate essays with a comma. */
+const ESSAYS = [
+  /*
+  {
+    slug: "my-first-essay",
+    title: "My First Essay",
+    date: "November 2026",
+    body: `First paragraph goes here.
+
+[image: my-photo.jpg | A caption for the photo]
+
+Second paragraph goes here.`
+  },
+  */
+];
+/* ============ END OF ESSAYS ============ */
+
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var baseTitle = document.title;
+
+  function showHome() {
+    $('home').hidden = false;
+    $('archive').hidden = false;
+    $('essay').hidden = true;
+    document.title = baseTitle;
+  }
+
+  function showEssay(slug) {
+    var e = null;
+    for (var i = 0; i < ESSAYS.length; i++) if (ESSAYS[i].slug === slug) e = ESSAYS[i];
+    if (!e) { showHome(); return; }
+    var box = $('essay');
+    box.textContent = '';
+    var h = document.createElement('h2'); h.textContent = e.title; box.appendChild(h);
+    if (e.date) { var d = document.createElement('p'); d.className = 'date'; d.textContent = e.date; box.appendChild(d); }
+    String(e.body).split(/\n\s*\n/).forEach(function (para) {
+      var t = para.trim();
+      if (!t) return;
+      var m = t.match(/^\[image:\s*([^|\]]+?)\s*(?:\|\s*([\s\S]*?))?\s*\]$/);
+      if (m) {
+        var fig = document.createElement('figure');
+        var img = document.createElement('img');
+        img.src = m[1]; img.alt = m[2] || ''; img.loading = 'lazy';
+        fig.appendChild(img);
+        if (m[2]) { var cap = document.createElement('figcaption'); cap.textContent = m[2]; fig.appendChild(cap); }
+        box.appendChild(fig);
+        return;
+      }
+      var p = document.createElement('p'); p.textContent = t; box.appendChild(p);
+    });
+    var back = document.createElement('a');
+    back.className = 'back'; back.href = '#archive'; back.textContent = 'Back to the archive';
+    back.addEventListener('click', function (ev) { ev.preventDefault(); go('archive'); });
+    box.appendChild(back);
+    $('home').hidden = true;
+    $('archive').hidden = true;
+    box.hidden = false;
+    document.title = e.title + ' \u2013 ' + baseTitle;
+    window.scrollTo(0, 0);
+  }
+
+  function go(slug) {
+    try { history.pushState(null, '', '#' + slug); } catch (err) { try { location.hash = slug; } catch (e2) {} }
+    route();
+  }
+
+  function route() {
+    var h = '';
+    try { h = decodeURIComponent(location.hash.slice(1)); } catch (err) {}
+    if (h && h !== 'archive') { showEssay(h); return; }
+    showHome();
+    if (h === 'archive') $('archive').scrollIntoView();
+  }
+
+  var list = $('entries');
+  ESSAYS.forEach(function (e) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = '#' + e.slug; a.textContent = e.title;
+    a.addEventListener('click', function (ev) { ev.preventDefault(); go(e.slug); });
+    li.appendChild(a);
+    if (e.date) { var s = document.createElement('span'); s.className = 'date'; s.textContent = e.date; li.appendChild(s); }
+    list.appendChild(li);
+  });
+  $('empty').hidden = ESSAYS.length > 0;
+
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
